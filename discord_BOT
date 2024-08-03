@@ -1,0 +1,57 @@
+import random
+import discord 
+from discord.ext import commands 
+from bot_logic import gen_pass 
+ 
+intents = discord.Intents.default() 
+intents.message_content = True 
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event 
+async def on_ready(): 
+    print(f'We have logged in as {bot.user}') 
+
+@bot.command()
+async def hello(ctx): 
+    await ctx.send(f'Привет! Я бот {bot.user}!') 
+
+@bot.command()
+async def comands(ctx): 
+    await ctx.send(f' Вот команды: $Minecraft, $BrawlStars - Игры; $Пластик, $Металл, $Стекло, $Батарейки - Мусор; $pasw - ген. пороля; $meme - мем!')
+
+@bot.command()
+async def Minecraft(ctx): 
+    await ctx.send(f'Обширная игра, по типу Terraria, но не 2D, а 3D и бесконечный мир')
+
+@bot.command()
+async def BrawlStars(ctx): 
+    await ctx.send(f'Самый легкоупровляемый шутер из всех, а ещё этот шутер похож на мульт. анимацию')
+
+@bot.command()
+async def Пластик(ctx): 
+    await ctx.send(f'Различная тара, стройматериалы, полиэтиленовые пакеты, игрушки.')
+
+@bot.command()
+async def Металл(ctx): 
+    await ctx.send(f'Конструкции из стали, оборудование и инструменты, автомобили, запчасти, металлическая упаковка, стальные опилки, стружка, другие виды отходов после раскроя металла, вышедшие из строя аккумуляторы, провода, кабель, отходы производств – литейного, гальванического, химического, металлургического и других.')
+
+@bot.command()
+async def Стекло(ctx): 
+    await ctx.send(f'Баночки от лекарств, стеклянная посуда, стеклянные банки, стеклянные бутылки.')
+
+@bot.command()
+async def Батарейки(ctx): 
+    await ctx.send(f'Батарейки только на переработку, выкидовать в мусорку нельзя.')
+
+@bot.command()
+async def pasw(ctx): 
+    await ctx.send(gen_pass(10))
+
+@bot.command()
+async def meme(ctx):
+    with open('images/mem1.jpg', 'rb') as f:
+        pic = discord.File(f)
+    await ctx.send(file=pic)
+
+bot.run('MTI2ODYwMDQ1MjI3MDkxNTU4Nw.Gdljb2.Xr2H52XJUsYRBWcLa2O3z8QVMz2JWfiphP9iaY')
